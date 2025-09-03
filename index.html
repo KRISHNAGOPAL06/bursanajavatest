@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>AI Test</title>
+</head>
+<body>
+  <h2>Ask AI</h2>
+  <input id="prompt" type="text" placeholder="Enter prompt">
+  <button onclick="askAI()">Send</button>
+  <pre id="response"></pre>
+
+  <script>
+    async function askAI() {
+      const prompt = document.getElementById("prompt").value;
+      const res = await fetch("http://localhost:8080/api/ai/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ prompt })
+      });
+      const text = await res.text();
+      document.getElementById("response").innerText = text;
+    }
+  </script>
+</body>
+</html>
